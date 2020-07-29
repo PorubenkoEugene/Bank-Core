@@ -1,0 +1,59 @@
+{
+    "name": "Bank-Core",
+    "private": false,
+    "engines": {
+        "node": "10.X"
+    },
+    "scripts": {
+        "prettier": "prettier ./src/**/*.{js,ts,tsx,json} --write",
+        "build": "mkdir dist -p && rm -r dist && tsc",
+        "start": "node -r ts-node/register src/index.ts",
+        "debug": "node --inspect-brk -r ts-node/register src/index.ts",
+        "db": "sudo docker run --rm -i -t -e POSTGRES_DB=test -e POSTGRES_PASSWORD=alpine -p 127.0.0.1:5432:5432 -v \"$PWD/debug-postgres.conf:/etc/postgresql/postgresql.conf\" postgres -c 'config_file=/etc/postgresql/postgresql.conf'",
+        "build-swagger": "mkdir ./.swagger -p && rm -r ./.swagger && mkdir ./.swagger -p && swagger-jsdoc -d ./swagger.config.js -o ./.swagger/swagger.json",
+        "swagger": "npm run build-swagger && sudo docker run --rm -i -t -e SWAGGER_JSON=/swagger/swagger.json -p 127.0.0.1:8080:8080 -v \"$PWD/.swagger:/swagger\" swaggerapi/swagger-ui"
+    },
+    "dependencies": {
+        "@koa/cors": "^3.0.0",
+        "@radoslaw-medryk/bank-core-shared": "^0.1.18",
+        "@radoslaw-medryk/tslint": "^0.1.7",
+        "@types/bcryptjs": "^2.4.2",
+        "@types/big.js": "^4.0.5",
+        "@types/jsonwebtoken": "^8.3.2",
+        "@types/koa": "^2.0.48",
+        "@types/koa-router": "^7.0.40",
+        "@types/koa__cors": "^2.2.3",
+        "@types/module-alias": "^2.0.0",
+        "@types/ms": "^0.7.30",
+        "@types/node": "^11.9.5",
+        "@types/require-dir": "^1.0.0",
+        "@types/slonik": "^15.4.0",
+        "@types/uuid": "^3.4.4",
+        "bcryptjs": "^2.4.3",
+        "big.js": "^5.2.2",
+        "jsonwebtoken": "^8.5.1",
+        "koa": "^2.7.0",
+        "koa-body": "^4.1.0",
+        "koa-combine-routers": "^4.0.2",
+        "koa-jwt": "^3.5.1",
+        "koa-router": "^7.4.0",
+        "module-alias": "^2.2.0",
+        "moment": "^2.24.0",
+        "ms": "^2.1.1",
+        "node": "^11.10.0",
+        "pg": "^7.8.1",
+        "pg-promise": "^8.6.3",
+        "require-dir": "^1.2.0",
+        "rusane": "^0.1.6",
+        "slonik": "^16.10.0",
+        "slonix": "^0.1.6",
+        "tslint": "^5.13.0",
+        "typescript": "^3.3.3333",
+        "uuid": "^3.3.2"
+    },
+    "devDependencies": {
+        "prettier": "^1.16.4",
+        "swagger-jsdoc": "^3.2.7",
+        "ts-node": "^8.0.2"
+    }
+}
